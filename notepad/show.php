@@ -1,13 +1,12 @@
 <?php
+require 'database/QueryBuilder.php';
+
+$id = $_GET['id'];
+
+$db = new QueryBuilder;
 
 
-$pdo = new PDO('mysql:host=localhost; dbname=test', 'test', 'test');
-
-
-$statement = $pdo->prepare("SELECT * FROM notes WHERE id=:id");
-$statement->bindParam(":id", $_GET['id']);
-$statement->execute();
-$task = $statement->fetch(PDO::FETCH_ASSOC);
+$task = $db->getOne($id, 'notes');
 
 
 

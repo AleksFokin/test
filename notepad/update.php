@@ -1,18 +1,16 @@
 <?php 
 
+require 'database/QueryBuilder.php';
+$db = new QueryBuilder;
+
 $data =[
     'id' => $_GET['id'],
     'title' =>  $_POST['title'],
     'content' => $_POST['content']
 ];
 
+$db->UpdateOne($data, 'notes');
 
-$pdo = new PDO('mysql:host=localhost; dbname=test', 'test', 'test');
-$sql = "UPDATE notes SET title=:title, content=:content WHERE id=:id";
-
-$statement = $pdo->prepare($sql);
-
-$result = $statement->execute($data);
 
 
 

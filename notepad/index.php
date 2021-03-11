@@ -1,14 +1,9 @@
 <?php
 
-$pdo = new PDO('mysql:host=localhost; dbname=test', 'test', 'test');
-$sql = "SELECT * FROM notes";
+require 'database/QueryBuilder.php';
+$db = new QueryBuilder;
 
-$statement = $pdo->prepare($sql);
-
-$result = $statement->execute();
-$statement->execute();
-$tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+$tasks = $db->getAll('notes');
 //var_dump($tasks);
 
 
@@ -48,7 +43,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 <td>
                                     <a href="show.php?id=<?=$task['id'];?>">   <div class="btn btn-info">show</div></a>
                                     <a href="edit.php?id=<?=$task['id'];?>">  <div class="btn btn-warning">edit</div></a>
-                                    <a href="delete.php?id=<?=$task['id'];?>">  <div class="btn btn-danger">delete</div></a>
+                                    <a onclick="return confirm('are you sure?');" href="delete.php?id=<?=$task['id'];?>">  <div class="btn btn-danger">delete</div></a>
                                 </td>
 
 
